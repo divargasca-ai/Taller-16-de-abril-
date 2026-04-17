@@ -1,0 +1,38 @@
+# 1. Importar librerías
+from scipy.optimize import linprog
+
+# 2. Función objetivo Max Z = 180x1 + 220x2
+# linprog SOLO minimiza entonces multiplicamos por -1
+
+c = [-180, -220]
+
+# 3. Restricciones (todas son <=, entonces se dejan igual)
+
+A_ub = [
+    [3, 4],   # 3x1 + 4x2 <= 120  (Compuesto A)
+    [2, 1],   # 2x1 + x2 <= 80    (Compuesto B)
+    [5, 3]    # 5x1 + 3x2 <= 150  (Compuesto C)
+]
+
+b_ub = [120, 80, 150]
+
+# 4. Restricciones de variables (x >= 0)
+
+x1_bounds = (0, None)
+x2_bounds = (0, None)
+
+bounds = [x1_bounds, x2_bounds]
+
+# 5. Resolver
+
+resultado = linprog(c, A_ub=A_ub, b_ub=b_ub, bounds=bounds, method='highs')
+
+# 6. Imprimir resultados
+
+print("Resultado")
+print(f"Estado: {resultado.message}")
+print(f"x1 (F1) = {resultado.x[0]:.4f} toneladas")
+print(f"x2 (F2) = {resultado.x[1]:.4f} toneladas")
+
+# Como se minimiza negativo, volvemos positivo
+print(f"Ganancia máxima = ${-resultado.fun:.4f}")
