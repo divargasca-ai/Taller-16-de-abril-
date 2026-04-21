@@ -1,22 +1,15 @@
-# 1. Valores iniciales
-S = 200  # sillas iniciales (S0)
-M = 80   # mesas iniciales (M0)
 
-print("Semana 0:")
-print(f"S = {S}, M = {M}")
 
-# 2. Calcular semana 1
-S1 = 0.6*S + 0.2*M + 40
-M1 = 0.1*S + 0.5*M + 20
 
-print("\nSemana 1:")
-print(f"S1 = {S1}")
-print(f"M1 = {M1}")
+# Simular varias semanas
 
-# 3. Calcular semana 2
-S2 = 0.6*S1 + 0.2*M1 + 40
-M2 = 0.1*S1 + 0.5*M1 + 20
+S = 200
+M = 80
 
-print("\nSemana 2:")
-print(f"S2 = {S2}")
-print(f"M2 = {M2}")
+for n in range(1, 6):
+    S_new = 0.6*S + 0.2*M + 40
+    M_new = 0.1*S + 0.5*M + 20
+
+    print(f"Semana {n}: S = {S_new:.2f}, M = {M_new:.2f}")
+
+    S, M = S_new, M_new
